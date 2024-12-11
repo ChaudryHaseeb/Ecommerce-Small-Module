@@ -1,0 +1,21 @@
+{
+  "name": "ecommerce-small-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "chaudry haseeb",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-async-handler": "^1.2.0",
+    "mongodb": "^6.12.0",
+    "mongoose": "^8.8.4",
+    "node": "^23.4.0",
+    "nodemon": "^3.1.7"
+  }
+}
