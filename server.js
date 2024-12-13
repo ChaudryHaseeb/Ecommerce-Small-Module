@@ -23,6 +23,10 @@ app.use('/uploads/Products', express.static(path.join(__dirname, 'uploads/Produc
 app.use('/api', require("./route/product"));
 
 
+app.use('/api', require("./route/variant"));
+app.use('/api', require("./route/order"));
+
+
 
 app.use(errorHandler);
 connectDB();
