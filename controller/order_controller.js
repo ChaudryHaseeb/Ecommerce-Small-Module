@@ -119,29 +119,34 @@ const get_order = expressAsyncHandler(async (req, res) => {
 //@access public
 
 const cancel = expressAsyncHandler(async (req, res) => {
-    const { id } = req.params;
+  const { id } = req.params;
 
-    if (!id) {
-        res.status(400);
-        throw new Error("Order id is required.");
-    }
+  if (!id) {
+      res.status(400);
+      throw new Error("Order id is required.");
+  }
 
-    const order = await Order.findById(id);
+  const order = await Order.findById(id);
 
-    if (!order) {
-        res.status(404);
-        throw new Error("Order not found.");
-    }
+  if (!order) {
+      res.status(404);
+      throw new Error("Order not found.");
+  }
 
-    if (order.status === 'cancelled') {
-        res.status(400);
-        throw new Error("Order is already cancelled.");
-    }
+  if (order.status !== 'Pending') {
+      res.status(400);
+      throw new Error("Order can only be cancelled if it is in 'Pending' status.");
+  }
 
-    order.status = 'Cancelled';
-    await order.save();
+  if (order.status === 'Cancelled') {
+    res.status(400);
+    throw new Error("Order is already cancelled.");
+}
 
-    res.status(200).json({ message: "Order has been cancelled.", order });
+  order.status = 'Cancelled';
+  await order.save();
+
+  res.status(200).json({ message: "Order has been cancelled successfully.", order });
 });
 
 module.exports = { create, get_orders, get_order,cancel };
